@@ -19,20 +19,10 @@ def is_in_date_range(start, end, target):
 	elif start.find('-') != -1:
 		uses_dashes = True
 
-	#TODO: use index of
-	# for char in start:
-	# 	if char == '/':
-	# 		uses_slashes = True
-	# 		break
-	# 	else if char == '-':
-	# 		uses_dashes = True
-	# 		break
-
 	if uses_dashes:
 		start = start.split('-')
 		end = end.split('-')
 		target = target.split('-')
-
 
 		start_date = datetime.date(int(start[0]), int(start[1]), int(start[2][:2]))
 		end_date = datetime.date(int(end[0]), int(end[1]), int(end[2][:2]))
@@ -51,10 +41,7 @@ def is_in_date_range(start, end, target):
 	print('start: ', start_date)
 	print('end: ', end_date)
 
-	if target_date > start_date and target_date < end_date:
-		return True
-	else:
-		return False
+	return target_date > start_date and target_date < end_date
 
 # #Processes information
 # def process(depart_range, depart_code, return_code):
