@@ -51,9 +51,9 @@ def is_in_date_range(start, end, target):
 	start_date = datetime.date(int(start[2]), int(start[0]), int(start[1]))
 	end_date = datetime.date(int(end[2]), int(end[0]), int(end[1]))
 
-	print('target: ', target_date)
-	print('start: ', start_date)
-	print('end: ', end_date)
+	# print('target: ', target_date)
+	# print('start: ', start_date)
+	# print('end: ', end_date)
 
 	return target_date > start_date and target_date < end_date
 
@@ -70,10 +70,10 @@ def process(deals, low_fares, left_date, right_date, depart_code, dest_code):
 	deal_list = deals[(depart_code,dest_code)]
 	low_list = low_fares[(depart_code, dest_code)]
 	for flight in deal_list:
-		print(flight[3])
+		#print(flight[3])
 		if is_in_date_range(left_date, right_date, flight[3]):
 			deals_in_range.append(flight)
-	print(low_list)
+	#print(low_list)
 	for flight in low_list:
 		if is_in_date_range(left_date, right_date, flight[2]):
 			lowest_fares_in_range.append(flight)
