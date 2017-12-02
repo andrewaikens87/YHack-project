@@ -5,6 +5,9 @@ import csv
 def getAllFlightsForOriginAndDestination(airport_data, origin, destination):
 	return
 
+def getLowestPrice():
+	return
+
 def getAirportData(airport_data, name):
 	return airport_data[name]
 
