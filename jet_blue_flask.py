@@ -35,7 +35,7 @@ if __name__ == '__main__':
 	first = True
 
 	with open('Deals.csv', newline='') as deals:
-		reader_deals = csv.reader(deals, delimiter=',', quotechar="|")
+		reader_deals = csv.reader(deals, delimiter=',', quotechar="\"")
 		for row in list(reader_deals):
 			if(first):
 				first = False
