@@ -23,7 +23,7 @@ def avgPrice(data):
 		elif flight[4] == 'POINTS':
 			cost_points += flight[5]
 			valid_flights_points +=1
-	return (0 if(cost_dollar == 0) else cost_dollar/valid_flights_dollar, 0 if(cost_points == 0) else cost_points/valid_flights_points)
+	return (0 if(valid_flights_dollar == 0) else cost_dollar/valid_flights_dollar, 0 if(valid_flights_points == 0) else cost_points/valid_flights_points)
 
 
 	
