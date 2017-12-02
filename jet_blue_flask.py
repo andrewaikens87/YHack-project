@@ -22,9 +22,8 @@ def hello():
 @app.route('/submit/', methods = ['POST'])
 def submit():
 	content = request.get_json()
-	output = jb.process(content['start_date_range'], content['return_date_range'], content['airport_code'])
+	output = jb.process(content['start_date_range'], content['depart_airport_code'], content['dest_airport_code'])
 	return jsonify(output)
-
 
 if __name__ == '__main__':
 	s = ""
@@ -52,5 +51,6 @@ if __name__ == '__main__':
 			else:
 				low_fares[t] = set()
 
+	print(deals_dict)
 
 	app.run()
