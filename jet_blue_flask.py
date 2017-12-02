@@ -22,9 +22,8 @@ def hello():
 @app.route('/submit/', methods = ['POST'])
 def submit():
 	content = request.get_json()
-	output = jb.process(content['start_date_range'], content['return_date_range'], content['airport_code'])
+	output = jb.process(content['start_date_range'], content['depart_airport_code'], content['dest_airport_code'])
 	return jsonify(output)
-
 
 if __name__ == '__main__':
 	s = ""
@@ -36,13 +35,13 @@ if __name__ == '__main__':
 	first = True
 
 	with open('Deals.csv', newline='') as deals:
-		reader_deals = csv.reader(deals, delimiter=',', quotechar="\"")
+		reader_deals = csv.reader(deals, delimiter=',', quotechar="|")
 		for row in list(reader_deals):
 			if(first):
 				first = False
 				continue
 			t = (row[1], row[2])
-			if(t in deals):
+			if(t in deals_dict):
 				deals_dict[t].add(tuple(row))
 			else:
 				deals_dict[t] = set()
@@ -62,4 +61,6 @@ if __name__ == '__main__':
 				low_fares[t] = set()
 				low_fares[t].add(tuple(row))
 
+
+	print(jb.process(deals_dict, low_fares, '12/2/2017', '12/31/2017', 'SFO', 'BOS'))
 	app.run()
