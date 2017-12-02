@@ -34,22 +34,23 @@ if __name__ == '__main__':
 	airplane_data = {i['code']: i for i in json_airplanes}
 	first = True
 
-	with open('Deals.csv', newline='\n') as deals:
-		reader_deals = csv.reader(deals, delimiter=',', quotechar='|')
-		for row in reader_deals:
+	with open('Deals.csv', newline='') as deals:
+		reader_deals = csv.reader(deals, delimiter=',', quotechar="\"")
+		for row in list(reader_deals):
 			if(first):
 				first = False
 				continue
-			t = (row[0], row[1])
+			t = (row[1], row[2])
 			if(t in deals):
 				deals_dict[t].add(tuple(row))
 			else:
 				deals_dict[t] = set()
+				deals_dict[t].add(tuple(row))
 
 	first = True
-	with open('LowestFares.csv', newline='\n') as lowfares:
-		reader_low = csv.reader(lowfares, delimiter=',', quotechar='|')
-		for row in reader_low:
+	with open('LowestFares.csv', newline='') as lowfares:
+		reader_low = csv.reader(lowfares, delimiter=',', quotechar='\"')
+		for row in list(reader_low):
 			if(first):
 				first = False
 				continue
@@ -58,6 +59,7 @@ if __name__ == '__main__':
 				low_fares[t].add(tuple(row))
 			else:
 				low_fares[t] = set()
+				low_fares[t].add(tuple(row))
 
 	print(jb.process(deals_dict, low_fares, '12/02/17', '12/31/17', 'JFK', 'POP'))
 	app.run()
