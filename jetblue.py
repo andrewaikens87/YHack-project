@@ -1,8 +1,12 @@
 import json
 import datetime
+import csv
 
-# current_date = date.today() #TODO: Double check this gets the right time
-# current_year = current_date.year
+def getAllFlightsForOriginAndDestination(airport_data, origin, destination):
+	return
+
+def getAirportData(airport_data, name):
+	return airport_data[name]
 
 #Takes in dates as strings
 def is_in_date_range(start, end, target):
@@ -58,7 +62,9 @@ def is_in_date_range(start, end, target):
 # 	for flight in flight_list:
 # 		if is_in_date_range(flight)
 
+
 if(__name__ == "__main__"):
 	print("Hello World")
 	print(is_in_date_range('12/1/1998 123', '12/12/2017 2123', '1/1/2000 123'))
 	print(is_in_date_range('12/1/2010 123', '12/12/2017 2123', '1/1/2000 123'))
+
