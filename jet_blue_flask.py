@@ -32,25 +32,31 @@ if __name__ == '__main__':
 	json_airplanes = json.loads(s)
 
 	airplane_data = {i['code']: i for i in json_airplanes}
+	first = True
 
-	with open('Deals.csv', newline='') as deals:
+	with open('Deals.csv', newline='\n') as deals:
 		reader_deals = csv.reader(deals, delimiter=',', quotechar='|')
 		for row in reader_deals:
+			if(first):
+				first = False
+				continue
 			t = (row[0], row[1])
 			if(t in deals):
 				deals_dict[t].add(tuple(row))
 			else:
 				deals_dict[t] = set()
 
-	with open('LowestFares.csv', newline='') as lowfares:
+	first = True
+	with open('LowestFares.csv', newline='\n') as lowfares:
 		reader_low = csv.reader(lowfares, delimiter=',', quotechar='|')
 		for row in reader_low:
+			if(first):
+				first = False
+				continue
 			t = (row[0], row[1])
 			if(t in low_fares):
 				low_fares[t].add(tuple(row))
 			else:
 				low_fares[t] = set()
-
-	print(deals_dict)
 
 	app.run()
