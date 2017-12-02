@@ -40,21 +40,34 @@ def is_in_date_range(start, end, target):
 
 	return target_date > start_date and target_date < end_date
 
-# #Processes information
+#Processes information
 #Assumes start_date and end_date in form of 'mm/dd/yyyy'
-def process(start_date, end_date, depart_code, dest_code):
+def process(deals, low_fares, start_date, end_date, depart_code, dest_code):
 	left_date = start_date.split('/')
 	right_date = end_date.split('/')
-	left_date = datetime.date(left_date[2], left_date[0], left_date[1])
-	right_date = datetime.date(right_date[2], right_date[0], right_date[1])
+	left_date = datetime.date(int(left_date[2]), int(left_date[0]), int(left_date[1]))
+	right_date = datetime.date(int(right_date[2]), int(right_date[0]), int(right_date[1]))
 
-	flight_list = deals[(depart_code,dest_code)]
-	flights_in_range = []
-	for flight in flight_list:
+	deals_in_range = []
+	lowest_fares_in_range = []
+	deal_list = deals[(depart_code,dest_code)]
+	low_list = low_fares[(depart_code, dest_code)]
+	for flight in deal_list:
 		if is_in_date_range(left_date, right_date, flight[2]):
-			flights_in_range.append(flight)
+			deals_in_range.append(flight)
 
-	return flights_in_range
+	for flight in low_list:
+		if is_in_date_range(left_date, right_date, flight[2]):
+			lowest_fares_in_range.append(flight)
+
+	return (deals_in_range, lowest_fares_in_range)
+
+#TODO: Consider points as well
+#Points is bool of if user wants to use points or not
+def cheapest_flight(deals_list):
+	#minimum = sys.maxsize()
+	return min(deals_list, key = lambda flight: flight[4]) 
+
 
 if(__name__ == "__main__"):
 	print("Hello World")

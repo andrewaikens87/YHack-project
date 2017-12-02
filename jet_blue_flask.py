@@ -59,4 +59,5 @@ if __name__ == '__main__':
 			else:
 				low_fares[t] = set()
 
+	print(jb.process(deals_dict, low_fares, '12/02/17', '12/31/17', 'JFK', 'POP'))
 	app.run()
