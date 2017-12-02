@@ -8,6 +8,22 @@ def getAllFlightsForOriginAndDestination(airport_data, origin, destination):
 def getAirportData(airport_data, name):
 	return airport_data[name]
 
+def avgPrice(data):
+	cost_dollar = 0
+	cost_points = 0
+	valid_flights_dollar = 0
+	valid_flights_points = 0
+	for flight in data:
+		if flight[4] == 'LOWEST':
+			cost_dollar += flight[5]
+			valid_flights_dollar += 1
+		elif flight[4] == 'POINTS':
+			cost_points += flight[5]
+			valid_flights_points +=1
+	return (cost_dollar/valid_flights_dollar, cost_points/valid_flights_points)
+
+
+	
 #Takes in dates as strings
 def is_in_date_range(start, end, target):
 	uses_slashes = False
