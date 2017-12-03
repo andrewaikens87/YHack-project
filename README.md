@@ -1,2 +1,11 @@
-# YHack-project
+# JetBlue Airfare Consultant
 Project for the 2017 Yale Hackathon (YHack)
+------------------------------------------------
+
+This program seeks to solve the problem that customers almost always face when attempting to book a flight: **What is the best choice for me and for what I need?** Flight prices and times can vary largely, and sometimes the need for a connecting flight can cause deciding on what flight(s) to take much more difficult, making it very easy to pay more than necessary for a flight.
+
+**The aim of this project is to provide an application interface through which a user may enter details for a flight that they may be interested in, which can then with Python and the Flask API be cross-referenced against the data that was provided to us to then finally show the user, in another HTML page, a formatted display of information such as cheap flights and get-away flights, average prices on flights, and any other statistic that can be projected with the data, to then ideally provide the user with more than enough easy to understand information to help them make a choice.** 
+
+We chose these statistics because we felt that some of the most important factors in booking a flight, both for the consumer and the airline, are factors such as price, travel distance, whether or not the flight is domestic, and how a possible gain of or expenditure of  Fare Points may affect consumers' willingness to book certain flights. These factors are pivotal to the airline industry and are therefore *invaluable* factors to monitor.
+
+This project is powered primarily by *Bootstrap* and *Flask*. Using these APIs, we have created an interface for the user to input information and also provided a connection between this hosted interface with our Python program(s), which then parse(s) two provided JetBlue .csv files containing thousands of lines that store data about flights, their destinations and sources, times, prices, and so on. These programs then in turn take this stored data and use several functions to retrieve interesting and useful information/patterns from within that data that can then be presented.  Upon expansion, this app could hopefully predict trends in flight patterns and purchases, and long term business trends for JetBlue.
