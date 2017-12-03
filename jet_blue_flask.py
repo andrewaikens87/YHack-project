@@ -25,7 +25,7 @@ def submit():
 	output = jb.process(content['start_date_range'], content['depart_airport_code'], content['dest_airport_code'])
 	return jsonify(output)
 
-if __name__ == '__main__':
+def runner():
 	s = ""
 	for line in open("airports.json"):
 		s += line
@@ -64,3 +64,7 @@ if __name__ == '__main__':
 
 	print(jb.process(deals_dict, low_fares, '12/2/2017', '12/31/2017', 'SFO', 'BOS'))
 	app.run()
+
+
+if __name__ == "__main__":
+	runner()
