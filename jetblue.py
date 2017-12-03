@@ -78,12 +78,14 @@ def avgPrice(data_tuple):
 	cost_points = 0
 	valid_flights_dollar = 0
 	valid_flights_points = 0
+	print(data)
 	for flight in data:
-		if flight[4] == 'LOWEST':
-			cost_dollar += flight[5]
+		print(flight)
+		if flight[5] == 'LOWEST':
+			cost_dollar += flight[6]
 			valid_flights_dollar += 1
-		elif flight[4] == 'POINTS':
-			cost_points += flight[5]
+		elif flight[5] == 'POINTS':
+			cost_points += flight[6]
 			valid_flights_points +=1
 	return (0 if(valid_flights_dollar == 0) else cost_dollar/valid_flights_dollar, 0 if(valid_flights_points == 0) else cost_points/valid_flights_points)
 	
@@ -100,6 +102,7 @@ def is_in_date_range(start, end, target):
 	if uses_dashes:
 		target = target.split('-')
 		target_date = datetime.date(int(target[0]), int(target[1]), int(target[2][:2]))
+
 	elif uses_slashes: 
 		target = target.split('/')
 		target_date = datetime.date(int(target[2][:4]), int(target[0]), int(target[1]))
@@ -129,6 +132,55 @@ def process(deals, low_fares, left_date, right_date, depart_code, dest_code):
 			lowest_fares_in_range.append(flight)
 
 	return (deals_in_range, lowest_fares_in_range)
+
+def cheapest_route(deals,low_fares,left_date,right_date,depart_code,dest_code):
+	#cheapest_direct = get_cheapest_flights(process(deals,low_fares,'0/0/0','12/31/2100',depart_code,dest_code),1)
+	min_connect_flight_cost = 99999
+	f1 = None
+	f2 = None
+	found2ndflight = False
+	for key,val in deals.items():
+		min_f1 = 99999
+		if key[0] == depart_code and key[1] != dest_code:
+			for item in val:
+				if is_in_date_range(left_date,right_date,item[3]) and float(item[7]) <= min_f1:
+					min_f1 = float(item[7])
+					f1 = item
+	for key1,val1 in deals.items():
+		min2 = 99999
+		if key1[0] == f1[2] and key1[1] == dest_code:
+			for item1 in val1:
+				if is_in_date_range(left_date,right_date,item1[3]) and float(item1[7]) <= min2:
+					min2 - float(item1[7])
+					f2 = item1
+					found2ndflight = True
+
+	if not found2ndflight:
+		return None
+	return (f1,f2)
+
+
+
+
+			
+
+	# if(cheapest_direct[0][5] <= min_connect_flight_cost):
+	# 	return cheapest_direct
+
+	# else:
+	# 	return conn_flight_list
+	return conn_flight_list
+
+
+
+
+
+
+
+
+
+
+
 
 if(__name__ == "__main__"):
 	print("Hello World")
