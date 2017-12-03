@@ -12,27 +12,16 @@ def get_cheapest_flights(deals_list, dollars):
 			cheapest_flights.append(flight)
 		else:
 			break
-	print(cheapest_flights)
-	print("DONE")
 	if dollars:
 		return list(filter(lambda flight: flight[5] == 'LOWEST', cheapest_flights))
 	else:
 		return list(filter(lambda flight: flight[5] != 'LOWEST', cheapest_flights))
-	
-#TODO: This is the same as get_cheapest_flight
-def getLowestPrice(data_tuple):
-	data = data_tuple[1]
-	min_price = 99999
-	for flight in data:
-		if flight[5] <= min_price:
-			min_row = flight
-			min_price = flight[5]
-	return min_row
 
 def getAirportData(airport_data, name):
 	return airport_data[name]
 
-def avgPrice(data):
+def avgPrice(data_tuple):
+	data = data_tuple[1]
 	cost_dollar = 0
 	cost_points = 0
 	valid_flights_dollar = 0
