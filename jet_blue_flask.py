@@ -58,29 +58,29 @@ def results(target_flights):
 	flight_list = jb.get_cheapest_flights(target_flights[0], True)
 	s1 = ''
 	for flight in flight_list:
-		s1 += "\tFrom: {} to: {}| Date: {}| Transfers: {}| Score: {}| Price: {} + Tax: {}\n".format(flight[1],
-			flight[2], flight[3], flight[4], flight[6], flight[7], flight[8])
+		s1 += "\tFrom {} to {} on {} with a score of {} | Price: ${} + Tax: ${}\n".format(flight[1],
+			flight[2], flight[3], flight[6], flight[7], flight[8])
 	results.append(s1)
 	
 	flight_list_2 = jb.get_cheapest_flights(target_flights[0], False)
 	s1 = ''
 	for flight in flight_list_2:
-		s1 += "\tFrom: {} to: {}| Date: {}| Transfers: {}| Score: {}| Price: {} + Tax: {}\n".format(flight[1],
-			flight[2], flight[3], flight[4], flight[6], flight[9], flight[10])
+		s1 += "\tFrom {} to {} on {} with a score of {} | Points from fare: {} + Points from tax: {}\n".format(flight[1],
+			flight[2], flight[3], flight[6], flight[9], flight[10])
 	results.append(s1)
 		
 	flight_list_3 = jb.get_cheapest_flights(deals_dict[(target_flights[0][0][1], target_flights[0][0][2])], True)
 	s1 = ''
 	for flight in flight_list_3:
-		s1 += "\tFrom: {} to: {}| Date: {}| Transfers: {}| Score: {}| Price: {} + Tax: {}\n".format(flight[1],
-			flight[2], flight[3], flight[4], flight[6], flight[7], flight[8])
+		s1 += "\tFrom {} to {} on {} with a score of {} | Price: ${} + Tax: ${}\n".format(flight[1],
+			flight[2], flight[3], flight[6], flight[7], flight[8])
 	results.append(s1)
 
 	flight_list_4 = jb.get_cheapest_flights(deals_dict[(target_flights[0][0][1], target_flights[0][0][2])], False)
 	s1 = ''
 	for flight in flight_list_4:
-		s1 += "\tFrom: {} to: {}| Date: {}| Transfers: {}| Score: {}| Price: {} + Tax: {}\n".format(flight[1],
-			flight[2], flight[3], flight[4], flight[6], flight[9], flight[10])
+		s1 += "\tFrom {} to {} on with a score: {} | Points from fare: {} + Points from tax: {}\n".format(flight[1],
+			flight[2], flight[3], flight[6], flight[9], flight[10])
 	results.append(s1)
 
 	results.append(jb.domestic_vs_international(low_fares))
