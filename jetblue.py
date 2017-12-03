@@ -25,7 +25,7 @@ def get_away(deals_dict, low_fares_dict, start_airport):
 					best_date = item[2]
 					where_to = item[1]
 
-	return tuple((lowest_price, best_date, where_to))
+	return (lowest_price, best_date, where_to)
 
 
 #dollars is bool of if user wants to use dollars or not
