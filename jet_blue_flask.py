@@ -123,3 +123,14 @@ def runner():
 			else:
 				low_fares[t] = set()
 				low_fares[t].add(tuple(row))
+
+
+
+	app.run()
+
+
+if __name__ == "__main__":
+	runner()
+
+
+
