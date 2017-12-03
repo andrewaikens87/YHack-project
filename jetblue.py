@@ -26,12 +26,14 @@ def avgPrice(data_tuple):
 	cost_points = 0
 	valid_flights_dollar = 0
 	valid_flights_points = 0
+	print(data)
 	for flight in data:
-		if flight[4] == 'LOWEST':
-			cost_dollar += flight[5]
+		print(flight)
+		if flight[5] == 'LOWEST':
+			cost_dollar += flight[6]
 			valid_flights_dollar += 1
-		elif flight[4] == 'POINTS':
-			cost_points += flight[5]
+		elif flight[5] == 'POINTS':
+			cost_points += flight[6]
 			valid_flights_points +=1
 	return (0 if(valid_flights_dollar == 0) else cost_dollar/valid_flights_dollar, 0 if(valid_flights_points == 0) else cost_points/valid_flights_points)
 	
@@ -48,7 +50,7 @@ def is_in_date_range(start, end, target):
 	if uses_dashes:
 		target = target.split('-')
 		target_date = datetime.date(int(target[0]), int(target[1]), int(target[2][:2]))
-		#print(target)
+		
 	elif uses_slashes: 
 		target = target.split('/')
 		target_date = datetime.date(int(target[2][:4]), int(target[0]), int(target[1]))

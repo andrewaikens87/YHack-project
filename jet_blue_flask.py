@@ -22,8 +22,38 @@ def hello():
 @app.route('/submit/', methods = ['POST'])
 def submit():
 	content = request.get_json()
-	output = jb.process(content['start_date_range'], content['depart_airport_code'], content['dest_airport_code'])
-	return jsonify(output)
+	output = jb.process(deals_dict, low_fares, content['start_date_range'], 
+		content['end_date_range'], content['depart_airport_code'], content['dest_airport_code'])
+	results(output)
+
+@app.route('/jetblue/index/')
+def index():
+	return render_template('index.html')
+
+#@app.route('/results/')
+def results(target_flights):
+	string = ''
+	string += 'Average price in range: ${}\n'.format(jb.avgPrice(target_flights))
+
+	string += 'Cheapest flight(s) in date range using USD: \n'
+	for flight in jb.get_cheapest_flights(target_flights, True):
+		string += '\t From: {} To: {} Date: {} Transfers: {} Score: {} Price: {} Tax: {}'.format(flight[1], flight[2],
+			flight[3], flight[4], flight[5], flight[6], flight[7])
+
+	string += 'Cheapest flight(s) in date range using points: \n'
+	for flight in jb.get_cheapest_flights(target_flights, False):
+		string += '\t From: {} To: {} Date: {} Transfers: {} Score: {} Price: {} Tax: {}'.format(flight[1], flight[2],
+			flight[3], flight[4], flight[5], flight[6], flight[7])
+
+	# string += 'Cheapest flight(s) regardless of date range using USD: \n'
+	# for flight in jb.get_cheapest_flights(deals_dict[(target_flights[0][1], target_flights[0][2])], True):
+	# 	string += '\t From: {} To: {} Date: {} Transfers: {} Score: {} Price: {} Tax: {}'.format(flight[1], flight[2],
+	# 		flight[3], flight[4], flight[5], flight[6], flight[7])
+
+	# string += 'Cheapest flight(s) regardless of date range using points: \n'
+	# for flight in jb.get_cheapest_flights(deals_dict[(target_flights[0][1], target_flights[0][2])], False):
+	# 	string += '\t From: {} To: {} Date: {} Transfers: {} Score: {} Price: {} Tax: {}'.format(flight[1], flight[2],
+	# 		flight[3], flight[4], flight[5], flight[6], flight[7])
 
 if __name__ == '__main__':
 	s = ""
@@ -62,5 +92,5 @@ if __name__ == '__main__':
 				low_fares[t].add(tuple(row))
 
 
-	print(jb.process(deals_dict, low_fares, '12/2/2017', '12/31/2017', 'SFO', 'BOS'))
+	print(results(jb.process(deals_dict, low_fares, '12/2/2017', '1/31/2018', 'SFO', 'BOS')))
 	app.run()
