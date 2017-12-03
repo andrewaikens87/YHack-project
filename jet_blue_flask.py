@@ -20,7 +20,9 @@ low_fares = dict()
 
 @app.route('/')
 def hello():
-	return 'Hello World!'
+	if(len(deals_dict) == 0):
+		runner()
+	return render_template('index.html')
 
 #Calls function on click of submit button
 @app.route('/submit/', methods = ['POST'])
@@ -30,9 +32,10 @@ def submit():
 	dest = request.form["dest"]
 	leftDate = request.form["departDate"]
 	rightDate = request.form["returnDate"]
+	if(len(deals_dict) == 0):
+		runner()
 
-	# output = jb.process(deals_dict, low_fares, leftDate, rightDate, origin, dest)
-	# results(output)
+	print(deals_dict[(origin,dest)])
 	return render_template('index.html')
 
 @app.route('/jetblue/index/')
@@ -99,9 +102,3 @@ def runner():
 				low_fares[t] = set()
 				low_fares[t].add(tuple(row))
 
-
-	app.run()
-
-
-if __name__ == "__main__":
-	runner()
