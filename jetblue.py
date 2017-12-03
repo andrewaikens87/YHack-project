@@ -2,6 +2,32 @@ import json
 import datetime
 import csv
 
+def get_away(deals_dict, low_fares_dict, start_airport):
+	lowest_price = 1000000
+	best_date = ""
+	where_to = ""
+
+	for k, v in deals_dict.items():
+		if(k[0] == start_airport):
+			for item in v:
+				cost = float(item[7]) + float(item[8])
+				if cost < lowest_price:
+					lowest_price = cost
+					best_date = item[3]
+					where_to = item[2]
+
+	for k, v in low_fares_dict.items():
+		if(k[0] == start_airport):
+			for item in v:
+				cost = float(item[5]) + float(item[6])
+				if cost < lowest_price:
+					lowest_price = cost
+					best_date = item[2]
+					where_to = item[1]
+
+	return tuple((lowest_price, best_date, where_to))
+
+
 #dollars is bool of if user wants to use dollars or not
 def get_cheapest_flights(deals_list, dollars):
 	cheapest_flights =[]
