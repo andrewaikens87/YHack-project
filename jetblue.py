@@ -74,7 +74,6 @@ def is_in_date_range(start, end, target):
 	if uses_dashes:
 		target = target.split('-')
 		target_date = datetime.date(int(target[0]), int(target[1]), int(target[2][:2]))
-		#print(target)
 	elif uses_slashes: 
 		target = target.split('/')
 		target_date = datetime.date(int(target[2][:4]), int(target[0]), int(target[1]))

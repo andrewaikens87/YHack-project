@@ -25,7 +25,7 @@ def submit():
 	output = jb.process(content['start_date_range'], content['depart_airport_code'], content['dest_airport_code'])
 	return jsonify(output)
 
-if __name__ == '__main__':
+def runner():
 	s = ""
 	for line in open("airports.json"):
 		s += line
@@ -35,7 +35,7 @@ if __name__ == '__main__':
 	first = True
 
 	with open('Deals.csv', newline='') as deals:
-		reader_deals = csv.reader(deals, delimiter=',', quotechar="|")
+		reader_deals = csv.reader(deals, delimiter=',', quotechar="\"")
 		for row in list(reader_deals):
 			if(first):
 				first = False
@@ -75,3 +75,7 @@ if __name__ == '__main__':
 			break
 
 	app.run()
+
+
+if __name__ == "__main__":
+	runner()
