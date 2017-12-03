@@ -27,13 +27,13 @@ def hello():
 #Calls function on click of submit button
 @app.route('/submit/', methods = ['POST'])
 def submit():
-	print(request.form)
 	origin = request.form["origin"]
 	dest = request.form["dest"]
 	leftDate = request.form["departDate"]
 	rightDate = request.form["returnDate"]
 	if(len(deals_dict) == 0):
 		runner()
+<<<<<<< HEAD
 
 	print(deals_dict[(origin,dest)])
 	target_flights = jb.process(deals_dict, low_fares, leftDate, rightDate, origin, dest)
@@ -113,12 +113,3 @@ def runner():
 			else:
 				low_fares[t] = set()
 				low_fares[t].add(tuple(row))
-
-
-	app.run()
-
-
-if __name__ == "__main__":
-	runner()
-=======
-
