@@ -1,4 +1,4 @@
-# H1 JetBlue Airfare Consultant
+# JetBlue Airfare Consultant
 Project for the 2017 Yale Hackathon (YHack)
 ------------------------------------------------
 
