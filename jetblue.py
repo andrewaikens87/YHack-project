@@ -26,6 +26,9 @@ def domestic_vs_international(low_fares_dict):
 	print("Average Domestic Flight Cost: {0:.2f}".format(float(domestic_cost_sum)/domestic_total_flights))
 	print("Average International Flight Cost: {0:.2f}".format(float(international_cost_sum)/international_total_flights))
 
+	return ("Domestic Flights: {0:6d}\nInternational Flights: {1:6d}\nTotal Flights: {2:6d}\n\nAverage Domestic Flight Cost: {3:.2f}\nAverage International Flight Cost: {4:.2f}".format(
+		domestic_total_flights, international_total_flights, total_flights, float(domestic_cost_sum)/domestic_total_flights, float(international_cost_sum)/international_total_flights))
+
 
 
 def get_away(deals_dict, low_fares_dict, start_airport):
@@ -51,7 +54,7 @@ def get_away(deals_dict, low_fares_dict, start_airport):
 					best_date = item[2]
 					where_to = item[1]
 
-	return (lowest_price, best_date, where_to)
+	return (str(lowest_price) + str(best_date) + str(where_to))
 
 
 #dollars is bool of if user wants to use dollars or not
