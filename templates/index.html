@@ -37,18 +37,18 @@
             <div style="width:1000px;margin: auto;" id="form-wrapper">
             <form class="form-inline" method="POST" action= "{{ url_for('submit') }}">
                 <label class="sr-only" for="inlineFormInputName2">Start Destination</label>
-                <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="origin" name="origin" placeholder="Start Destination">
+                <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="origin" name="origin" placeholder="Start Destination (ex: BOS)">
 
                 <label class="sr-only" for="inlineFormInputName2">End Destination</label>
-                <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="dest" name="dest" placeholder="End Destination">
+                <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="dest" name="dest" placeholder="End Destination (ex: SFO)">
 
 
                 <label class="sr-only" for="inlineFormInputName2">Departure Date</label>
-                <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="departDate" name="departDate" placeholder="Departure Date">
+                <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="departDate" name="departDate" placeholder="Start Date (ex: 12/1/2017)">
 
 
                <label class="sr-only" for="inlineFormInputName2">Return Date</label>
-                <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="returnDate" name="returnDate" placeholder="Return Date">
+                <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="returnDate" name="returnDate" placeholder="End Date (ex: 12/31/2017)">
 
 
                 <button type="submit" class="btn btn-primary">Submit</button>

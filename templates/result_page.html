@@ -1,16 +1,148 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title></title>
-</head>
-<body>
-Average: {{ average }} <br />
-Cheapest flight(s) in the date range (USD): {{ minInRangeDollars }} <br />
-Cheapest flight(s) in the date range (Points): {{ minInRangePoints }} <br />
-Cheapest flight(s) out of the date range (USD): {{ minOutOfRangeDollars }} <br />
-Cheapest flight(s) out of the date range (Points): {{ minOutOfRangePoints }} <br />
-Domestic versus International stats: {{ domVsInt }} <br />
-Want to get away? Here is the best deal! {{ getAway }} <br />
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="/static/favicon.ico">
 
-</body>
+    <title>JetBlue Analytics</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="/static/css/cover.css" rel="stylesheet">
+  </head>
+
+  <body>
+
+    <div class="site-wrapper">
+
+      <div class="site-wrapper-inner">
+
+          <header style="margin-bottom: 30px;" class="masthead clearfix">
+            <div class="inner">
+
+              <img style ="height:30%;width:30%;" src="/static/lgoo3.png"/>  
+            </div>
+          </header>
+
+            <div style="margin:30px; color:#203737; text-decoration: none; text-shadow: none;" id="wrapper">
+          	<div style="text-shadow:none; vertical-align: middle;" class="alert alert-primary" role="alert"><span style="top:-6px;position:relative;float:left"><a class="btn btn-primary" href="http://localhost:5000" role="button">Go Back</a></span><strong>Want to get away? Here is the best deal!</strong> {{ getAway }}</div>
+
+
+<div style="width:20%; margin-bottom: 50px; display: inline-block; float:left;" id="left">
+
+<div  class="card">
+  <div class="card-header">
+    Average Low Fare Price
+  </div>
+  <div class="card-block">
+    <h4 style="margin:20px;" class="card-text">${{ "{:,.2f}".format(average[0]) }}<br/>OR<br/>{{ "{:,.2f} Points".format(average[1]) }}</h4>
+ 
+  </div>
+</div>
+
+<div style="margin-top: 20px;" class="card">
+  <div class="card-header">
+    Domestic versus International stats
+  </div>
+  <div class="card-block">
+    <h4 style="margin:20px;" class="card-text">{{ domVsInt|safe }}</h4>
+ 
+  </div>
+</div>
+
+</div>
+
+<div style="width:80%; display: inline-block; float:right;" id="right">
+
+<div style="margin-left: 30px;" class="card">
+  <div class="card-header">
+    Cheapest flight(s) in the date range (USD)
+  </div>
+  <div class="card-block">
+    <h4 style="margin:20px;" class="card-text">{{ minInRangeDollars }}</h4>
+ 
+  </div>
+  <div  class="card-block">
+    <a style="color:#203737;" href="#" class="card-link">View Trip</a>
+    <a style="color:#203737;" href="#" class="card-link">Book</a>
+  </div>
+</div>
+
+<div style="margin-left: 30px;margin-top: 20px;" class="card">
+  <div class="card-header">
+    Cheapest flight(s) in the date range (Points)
+  </div>
+  <div class="card-block">
+    <h4 style="margin:20px;" class="card-text">{{ minInRangePoints }}</h4>
+ 
+  </div>
+    <div  class="card-block">
+    <a style="color:#203737;" href="#" class="card-link">View Trip</a>
+    <a style="color:#203737;" href="#" class="card-link">Book</a>
+  </div>
+</div>
+
+<div style="margin-left: 30px;margin-top: 20px;" class="card">
+  <div class="card-header">
+    Cheapest flight(s) out of the date range (USD)
+  </div>
+  <div class="card-block">
+    <h4 style="margin:20px;" class="card-text">{{ minOutOfRangeDollars }}</h4>
+ 
+  </div>
+  <div  class="card-block">
+    <a style="color:#203737;" href="#" class="card-link">View Trip</a>
+    <a style="color:#203737;" href="#" class="card-link">Book</a>
+  </div>
+</div>
+
+<div style="margin-left: 30px;margin-top: 20px;" class="card">
+  <div class="card-header">
+   Cheapest flight(s) out of the date range (Points)
+  </div>
+  <div class="card-block">
+    <h4 style="margin:20px;" class="card-text">{{ minOutOfRangePoints }}</h4>
+ 
+  </div>
+  <div  class="card-block">
+    <a style="color:#203737;" href="#" class="card-link">View Trip</a>
+    <a style="color:#203737;" href="#" class="card-link">Book</a>
+  </div>
+</div>
+
+</div>
+
+
+
+ </div>
+
+ <br />
+              
+           
+ <div class="inner">
+              <p>Created for YHack by Andrew Aikens, Atticus Lin, Eric Pianin, and Matthew Ruskamp. Styled using Bootstrap.</p>
+            </div>
+      
+        </div>
+
+
+      </div>
+
+
+    </div>
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="/static/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="/static/js/vendor/popper.min.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+  </body>
 </html>
