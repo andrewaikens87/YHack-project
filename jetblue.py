@@ -6,13 +6,20 @@ import csv
 def getAllFlightsForOriginAndDestination(airport_data, origin, destination):
 	return
 
-def getLowestPrice():
-	return
+def getLowestPrice(data_tuple):
+	data = data_tuple[1]
+	min_price = 99999
+	for flight in data:
+		if flight[5] <= min_price:
+			min_row = flight
+			min_price = flight[5]
+	return min_row
 
 def getAirportData(airport_data, name):
 	return airport_data[name]
 
-def avgPrice(data):
+def avgPrice(data_tuple):
+	data = data_tuple[1]
 	cost_dollar = 0
 	cost_points = 0
 	valid_flights_dollar = 0
