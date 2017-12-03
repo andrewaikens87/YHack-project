@@ -44,14 +44,25 @@ def results(target_flights):
 	string += 'Average price in range: ${}\n'.format(jb.avgPrice(target_flights))
 
 	string += 'Cheapest flight(s) in date range using USD: \n'
+	i = 0
+	temp_avg = 0
 	for flight in jb.get_cheapest_flights(target_flights, True):
 		string += '\t From: {} To: {} Date: {} Transfers: {} Score: {} Price: {} Tax: {}'.format(flight[1], flight[2],
 			flight[3], flight[4], flight[5], flight[6], flight[7])
+		i += 1
+		temp_avg += flight[7]
+	average_dollars = float(temp_avg)/i
 
+	i = 0
+	temp_avg = 0
 	string += 'Cheapest flight(s) in date range using points: \n'
 	for flight in jb.get_cheapest_flights(target_flights, False):
 		string += '\t From: {} To: {} Date: {} Transfers: {} Score: {} Price: {} Tax: {}'.format(flight[1], flight[2],
 			flight[3], flight[4], flight[5], flight[6], flight[7])
+		i += 1
+		temp_avg += flight[6]
+	average_final_score = float(temp_avg)/i
+
 
 	# string += 'Cheapest flight(s) regardless of date range using USD: \n'
 	# for flight in jb.get_cheapest_flights(deals_dict[(target_flights[0][1], target_flights[0][2])], True):
@@ -98,7 +109,6 @@ def runner():
 			else:
 				low_fares[t] = set()
 				low_fares[t].add(tuple(row))
-
 
 	app.run()
 
