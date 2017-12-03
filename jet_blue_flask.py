@@ -45,30 +45,34 @@ def index():
 def results(target_flights):
 	string = ''
 	string += 'Average price in range: ${}\n'.format(jb.avgPrice(target_flights))
+	results = []
+
+	average = jb.avgPrice(target_flights)
+	results.append(average)
+
+	s = ", "
 
 	string += 'Cheapest flight(s) in date range using USD: \n'
-	
-	for flight in jb.get_cheapest_flights(target_flights, True):
-		string += '\t From: {} To: {} Date: {} Transfers: {} Score: {} Price: {} Tax: {}'.format(flight[1], flight[2],
-			flight[3], flight[4], flight[5], flight[6], flight[7])
 
+	flight_list = jb.get_cheapest_flights(target_flights, True)
+	s1 = s.join(flight_list)
+	results.append(s1)
 	
-	string += 'Cheapest flight(s) in date range using points: \n'
-	for flight in jb.get_cheapest_flights(target_flights, False):
-		string += '\t From: {} To: {} Date: {} Transfers: {} Score: {} Price: {} Tax: {}'.format(flight[1], flight[2],
-			flight[3], flight[4], flight[5], flight[6], flight[7])
+	flight_list_2 = jb.get_cheapest_flights(target_flights, False)
+	s1 = s.join(flight_list_2)
+	results.append(s1)
 		
+	flight_list_3 = jb.get_cheapest_flights(deals_dict[(target_flights[0][1], target_flights[0][2])], True)
+	s1 = s.join(flight_list_3)
+	results.append(s1)
 
+	flight_list_4 = jb.get_cheapest_flights(deals_dict[(target_flights[0][1], target_flights[0][2])], False)
+	s1 = s.join(flight_list_4)
+	results.append(s1)
 
-	# string += 'Cheapest flight(s) regardless of date range using USD: \n'
-	# for flight in jb.get_cheapest_flights(deals_dict[(target_flights[0][1], target_flights[0][2])], True):
-	# 	string += '\t From: {} To: {} Date: {} Transfers: {} Score: {} Price: {} Tax: {}'.format(flight[1], flight[2],
-	# 		flight[3], flight[4], flight[5], flight[6], flight[7])
+	results.append(domestic_vs_international(low_fares))
 
-	# string += 'Cheapest flight(s) regardless of date range using points: \n'
-	# for flight in jb.get_cheapest_flights(deals_dict[(target_flights[0][1], target_flights[0][2])], False):
-	# 	string += '\t From: {} To: {} Date: {} Transfers: {} Score: {} Price: {} Tax: {}'.format(flight[1], flight[2],
-	# 		flight[3], flight[4], flight[5], flight[6], flight[7])
+	results.append(get_away(deals_dict, low_fares, target_flights[1]))
 
 def runner():
 	s = ""
@@ -106,11 +110,11 @@ def runner():
 				low_fares[t] = set()
 				low_fares[t].add(tuple(row))
 
-<<<<<<< HEAD
+
 	app.run()
 
 
 if __name__ == "__main__":
 	runner()
 =======
->>>>>>> master
+
