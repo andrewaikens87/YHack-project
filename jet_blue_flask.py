@@ -20,7 +20,9 @@ low_fares = dict()
 
 @app.route('/')
 def hello():
-	return 'Hello World!'
+	if(len(deals_dict) == 0):
+		runner()
+	return render_template('index.html')
 
 #Calls function on click of submit button
 @app.route('/submit/', methods = ['POST'])
@@ -30,9 +32,10 @@ def submit():
 	dest = request.form["dest"]
 	leftDate = request.form["departDate"]
 	rightDate = request.form["returnDate"]
+	if(len(deals_dict) == 0):
+		runner()
 
-	# output = jb.process(deals_dict, low_fares, leftDate, rightDate, origin, dest)
-	# results(output)
+	print(deals_dict[(origin,dest)])
 	return render_template('index.html')
 
 @app.route('/jetblue/index/')
@@ -44,24 +47,17 @@ def results(target_flights):
 	string += 'Average price in range: ${}\n'.format(jb.avgPrice(target_flights))
 
 	string += 'Cheapest flight(s) in date range using USD: \n'
-	i = 0
-	temp_avg = 0
+	
 	for flight in jb.get_cheapest_flights(target_flights, True):
 		string += '\t From: {} To: {} Date: {} Transfers: {} Score: {} Price: {} Tax: {}'.format(flight[1], flight[2],
 			flight[3], flight[4], flight[5], flight[6], flight[7])
-		i += 1
-		temp_avg += flight[7]
-	average_dollars = float(temp_avg)/i
 
-	i = 0
-	temp_avg = 0
+	
 	string += 'Cheapest flight(s) in date range using points: \n'
 	for flight in jb.get_cheapest_flights(target_flights, False):
 		string += '\t From: {} To: {} Date: {} Transfers: {} Score: {} Price: {} Tax: {}'.format(flight[1], flight[2],
 			flight[3], flight[4], flight[5], flight[6], flight[7])
-		i += 1
-		temp_avg += flight[6]
-	average_final_score = float(temp_avg)/i
+		
 
 
 	# string += 'Cheapest flight(s) regardless of date range using USD: \n'
@@ -110,8 +106,11 @@ def runner():
 				low_fares[t] = set()
 				low_fares[t].add(tuple(row))
 
+<<<<<<< HEAD
 	app.run()
 
 
 if __name__ == "__main__":
 	runner()
+=======
+>>>>>>> master
