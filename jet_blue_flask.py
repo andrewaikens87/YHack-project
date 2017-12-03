@@ -33,7 +33,6 @@ def submit():
 	rightDate = request.form["returnDate"]
 	if(len(deals_dict) == 0):
 		runner()
-<<<<<<< HEAD
 
 	print(deals_dict[(origin,dest)])
 	target_flights = jb.process(deals_dict, low_fares, leftDate, rightDate, origin, dest)
@@ -54,29 +53,40 @@ def results(target_flights):
 	average = jb.avgPrice(target_flights)
 	results.append(average)
 
-	s = ", "
-
 	string += 'Cheapest flight(s) in date range using USD: \n'
 
-	flight_list = jb.get_cheapest_flights(target_flights, True)
-	s1 = s.join(flight_list)
+	flight_list = jb.get_cheapest_flights(target_flights[0], True)
+	s1 = ''
+	for flight in flight_list:
+		s1 += "\tFrom: {} to: {}| Date: {}| Transfers: {}| Score: {}| Price: {} + Tax: {}\n".format(flight[1],
+			flight[2], flight[3], flight[4], flight[6], flight[7], flight[8])
 	results.append(s1)
 	
-	flight_list_2 = jb.get_cheapest_flights(target_flights, False)
-	s1 = s.join(flight_list_2)
+	flight_list_2 = jb.get_cheapest_flights(target_flights[0], False)
+	s1 = ''
+	for flight in flight_list_2:
+		s1 += "\tFrom: {} to: {}| Date: {}| Transfers: {}| Score: {}| Price: {} + Tax: {}\n".format(flight[1],
+			flight[2], flight[3], flight[4], flight[6], flight[9], flight[10])
 	results.append(s1)
 		
-	flight_list_3 = jb.get_cheapest_flights(deals_dict[(target_flights[0][1], target_flights[0][2])], True)
-	s1 = s.join(flight_list_3)
+	flight_list_3 = jb.get_cheapest_flights(deals_dict[(target_flights[0][0][1], target_flights[0][0][2])], True)
+	s1 = ''
+	for flight in flight_list_3:
+		s1 += "\tFrom: {} to: {}| Date: {}| Transfers: {}| Score: {}| Price: {} + Tax: {}\n".format(flight[1],
+			flight[2], flight[3], flight[4], flight[6], flight[7], flight[8])
 	results.append(s1)
 
-	flight_list_4 = jb.get_cheapest_flights(deals_dict[(target_flights[0][1], target_flights[0][2])], False)
-	s1 = s.join(flight_list_4)
+	flight_list_4 = jb.get_cheapest_flights(deals_dict[(target_flights[0][0][1], target_flights[0][0][2])], False)
+	s1 = ''
+	for flight in flight_list_4:
+		s1 += "\tFrom: {} to: {}| Date: {}| Transfers: {}| Score: {}| Price: {} + Tax: {}\n".format(flight[1],
+			flight[2], flight[3], flight[4], flight[6], flight[9], flight[10])
 	results.append(s1)
 
-	results.append(domestic_vs_international(low_fares))
+	results.append(jb.domestic_vs_international(low_fares))
 
-	results.append(get_away(deals_dict, low_fares, target_flights[1]))
+	results.append(jb.get_away(deals_dict, low_fares, target_flights[0][0][1]))
+	return results
 
 def runner():
 	s = ""

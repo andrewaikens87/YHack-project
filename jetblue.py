@@ -54,7 +54,7 @@ def get_away(deals_dict, low_fares_dict, start_airport):
 					best_date = item[2]
 					where_to = item[1]
 
-	return (str(lowest_price) + str(best_date) + str(where_to))
+	return "Best Deal from {}: Lowest price: {}| Best date: {}| Destination: {}".format(start_airport, lowest_price, best_date, where_to)
 
 
 #dollars is bool of if user wants to use dollars or not
@@ -81,14 +81,12 @@ def avgPrice(data_tuple):
 	cost_points = 0
 	valid_flights_dollar = 0
 	valid_flights_points = 0
-	print(data)
 	for flight in data:
-		print(flight)
-		if flight[5] == 'LOWEST':
-			cost_dollar += flight[6]
+		if flight[4] == 'LOWEST':
+			cost_dollar += float(flight[5])
 			valid_flights_dollar += 1
-		elif flight[5] == 'POINTS':
-			cost_points += flight[6]
+		elif flight[4] == 'POINTS':
+			cost_points += float(flight[7])
 			valid_flights_points +=1
 	return (0 if(valid_flights_dollar == 0) else cost_dollar/valid_flights_dollar, 0 if(valid_flights_points == 0) else cost_points/valid_flights_points)
 	
