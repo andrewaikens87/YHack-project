@@ -2,6 +2,32 @@ import json
 import datetime
 import csv
 
+def domestic_vs_international(low_fares_dict):
+	international_cost_sum = 0
+	international_total_flights = 0
+	domestic_cost_sum = 0
+	domestic_total_flights = 0
+
+	#Using only low fares to avoid duplicates seeing as it is the much larger data set
+	for k, v in low_fares_dict.items():
+		for item in v:
+			cost = float(item[5]) + float(item[6])
+			if int(item[9]) == 1:
+				domestic_cost_sum += cost
+				domestic_total_flights += 1
+			elif int(item[9]) == 0:
+				international_cost_sum += cost
+				international_total_flights += 1
+
+	total_flights = domestic_total_flights + international_total_flights
+	print("Domestic Flights: {0:6d}".format(domestic_total_flights))
+	print("International Flights: {0:6d}".format(international_total_flights))
+	print("Total Flights: {0:6d}\n".format(total_flights))
+	print("Average Domestic Flight Cost: {0:.2f}".format(float(domestic_cost_sum)/domestic_total_flights))
+	print("Average International Flight Cost: {0:.2f}".format(float(international_cost_sum)/international_total_flights))
+
+
+
 def get_away(deals_dict, low_fares_dict, start_airport):
 	lowest_price = 1000000
 	best_date = ""
@@ -106,6 +132,55 @@ def process(deals, low_fares, left_date, right_date, depart_code, dest_code):
 			lowest_fares_in_range.append(flight)
 
 	return (deals_in_range, lowest_fares_in_range)
+
+def cheapest_route(deals,low_fares,left_date,right_date,depart_code,dest_code):
+	#cheapest_direct = get_cheapest_flights(process(deals,low_fares,'0/0/0','12/31/2100',depart_code,dest_code),1)
+	min_connect_flight_cost = 99999
+	f1 = None
+	f2 = None
+	found2ndflight = False
+	for key,val in deals.items():
+		min_f1 = 99999
+		if key[0] == depart_code and key[1] != dest_code:
+			for item in val:
+				if is_in_date_range(left_date,right_date,item[3]) and float(item[7]) <= min_f1:
+					min_f1 = float(item[7])
+					f1 = item
+	for key1,val1 in deals.items():
+		min2 = 99999
+		if key1[0] == f1[2] and key1[1] == dest_code:
+			for item1 in val1:
+				if is_in_date_range(left_date,right_date,item1[3]) and float(item1[7]) <= min2:
+					min2 - float(item1[7])
+					f2 = item1
+					found2ndflight = True
+
+	if not found2ndflight:
+		return None
+	return (f1,f2)
+
+
+
+
+			
+
+	# if(cheapest_direct[0][5] <= min_connect_flight_cost):
+	# 	return cheapest_direct
+
+	# else:
+	# 	return conn_flight_list
+	return conn_flight_list
+
+
+
+
+
+
+
+
+
+
+
 
 if(__name__ == "__main__"):
 	print("Hello World")

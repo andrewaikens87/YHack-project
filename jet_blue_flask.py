@@ -20,7 +20,9 @@ low_fares = dict()
 
 @app.route('/')
 def hello():
-	return 'Hello World!'
+	if(len(deals_dict) == 0):
+		runner()
+	return render_template('index.html')
 
 #Calls function on click of submit button
 @app.route('/submit/', methods = ['POST'])
@@ -30,9 +32,10 @@ def submit():
 	dest = request.form["dest"]
 	leftDate = request.form["departDate"]
 	rightDate = request.form["returnDate"]
+	if(len(deals_dict) == 0):
+		runner()
 
-	# output = jb.process(deals_dict, low_fares, leftDate, rightDate, origin, dest)
-	# results(output)
+	print(deals_dict[(origin,dest)])
 	return render_template('index.html')
 
 @app.route('/jetblue/index/')
@@ -99,23 +102,3 @@ def runner():
 				low_fares[t] = set()
 				low_fares[t].add(tuple(row))
 
-	i = 0
-	input_array = []
-	while(i < 4):
-		input_string = str(input())
-		input_array.append(input_string)
-		i += 1
-		if(i == 4):
-			#print(jb.process(deals_dict, low_fares, input_array[0], input_array[1], input_array[2], input_array[3]))
-			i = 0
-			print((jb.get_away(deals_dict, low_fares, input_array[2]))[0], (jb.get_away(deals_dict, low_fares, input_array[2]))[1], (jb.get_away(deals_dict, low_fares, input_array[2]))[2])
-		if(input_string == "quit"):
-			break
-
-	print(results(jb.process(deals_dict, low_fares, '12/2/2017', '1/31/2018', 'SFO', 'BOS')))
-
-	app.run()
-
-
-if __name__ == "__main__":
-	runner()
