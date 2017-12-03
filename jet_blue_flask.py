@@ -36,7 +36,11 @@ def submit():
 		runner()
 
 	print(deals_dict[(origin,dest)])
-	return render_template('index.html')
+	target_flights = jb.process(deals_dict, low_fares, leftDate, rightDate, origin, dest)
+
+	results_list = results(target_flights)
+	return render_template('result_page.html', average = results_list[0], minInRangeDollars = results_list[1], minInRangePoints = results_list[2],
+		minOutOfRangeDollars = results_list[3], minOutOfRangePoints = results_list[4], domVsInt = results_list[5], getAway = results_list[6])
 
 @app.route('/jetblue/index/')
 def index():
