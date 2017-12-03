@@ -25,16 +25,20 @@ def hello():
 #Calls function on click of submit button
 @app.route('/submit/', methods = ['POST'])
 def submit():
-	content = request.get_json()
-	output = jb.process(deals_dict, low_fares, content['start_date_range'], 
-		content['end_date_range'], content['depart_airport_code'], content['dest_airport_code'])
-	results(output)
+	print(request.form)
+	origin = request.form["origin"]
+	dest = request.form["dest"]
+	leftDate = request.form["departDate"]
+	rightDate = request.form["returnDate"]
+
+	# output = jb.process(deals_dict, low_fares, leftDate, rightDate, origin, dest)
+	# results(output)
+	return render_template('index.html')
 
 @app.route('/jetblue/index/')
 def index():
 	return render_template('index.html')
 
-#@app.route('/results/')
 def results(target_flights):
 	string = ''
 	string += 'Average price in range: ${}\n'.format(jb.avgPrice(target_flights))
