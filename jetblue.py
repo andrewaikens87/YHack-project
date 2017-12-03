@@ -104,6 +104,55 @@ def process(deals, low_fares, left_date, right_date, depart_code, dest_code):
 
 	return (deals_in_range, lowest_fares_in_range)
 
+def cheapest_route(deals,low_fares,left_date,right_date,depart_code,dest_code):
+	#cheapest_direct = get_cheapest_flights(process(deals,low_fares,'0/0/0','12/31/2100',depart_code,dest_code),1)
+	min_connect_flight_cost = 99999
+	f1 = None
+	f2 = None
+	found2ndflight = False
+	for key,val in deals.items():
+		min_f1 = 99999
+		if key[0] == depart_code and key[1] != dest_code:
+			for item in val:
+				if is_in_date_range(left_date,right_date,item[3]) and float(item[7]) <= min_f1:
+					min_f1 = float(item[7])
+					f1 = item
+	for key1,val1 in deals.items():
+		min2 = 99999
+		if key1[0] == f1[2] and key1[1] == dest_code:
+			for item1 in val1:
+				if is_in_date_range(left_date,right_date,item1[3]) and float(item1[7]) <= min2:
+					min2 - float(item1[7])
+					f2 = item1
+					found2ndflight = True
+
+	if not found2ndflight:
+		return None
+	return (f1,f2)
+
+
+
+
+			
+
+	# if(cheapest_direct[0][5] <= min_connect_flight_cost):
+	# 	return cheapest_direct
+
+	# else:
+	# 	return conn_flight_list
+	return conn_flight_list
+
+
+
+
+
+
+
+
+
+
+
+
 if(__name__ == "__main__"):
 	print("Hello World")
 	# print(is_in_date_range('12/01/1998', '12/12/2017', '01/01/2000'))
