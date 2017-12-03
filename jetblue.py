@@ -2,12 +2,32 @@ import json
 import datetime
 import csv
 
-
-def getAllFlightsForOriginAndDestination(airport_data, origin, destination):
-	return
-
-def getLowestPrice():
-	return
+#dollars is bool of if user wants to use dollars or not
+def get_cheapest_flights(deals_list, dollars):
+	cheapest_flights =[]
+	sorted_list = sorted(deals_list, key = lambda flight: flight[6])
+	min_price = min(deals_list, key = lambda flight: flight[6])[6]
+	for flight in sorted_list:
+		if flight[6] == min_price:
+			cheapest_flights.append(flight)
+		else:
+			break
+	print(cheapest_flights)
+	print("DONE")
+	if dollars:
+		return list(filter(lambda flight: flight[5] == 'LOWEST', cheapest_flights))
+	else:
+		return list(filter(lambda flight: flight[5] != 'LOWEST', cheapest_flights))
+	
+#TODO: This is the same as get_cheapest_flight
+def getLowestPrice(data_tuple):
+	data = data_tuple[1]
+	min_price = 99999
+	for flight in data:
+		if flight[5] <= min_price:
+			min_row = flight
+			min_price = flight[5]
+	return min_row
 
 def getAirportData(airport_data, name):
 	return airport_data[name]
@@ -25,8 +45,6 @@ def avgPrice(data):
 			cost_points += flight[5]
 			valid_flights_points +=1
 	return (0 if(valid_flights_dollar == 0) else cost_dollar/valid_flights_dollar, 0 if(valid_flights_points == 0) else cost_points/valid_flights_points)
-
-
 	
 #Takes in dates as strings
 def is_in_date_range(start, end, target):
@@ -58,11 +76,6 @@ def is_in_date_range(start, end, target):
 #Processes information
 #Assumes start_date and end_date in form of 'mm/dd/yyyy'
 def process(deals, low_fares, left_date, right_date, depart_code, dest_code):
-	# left_date = start_date.split('/')
-	# right_date = end_date.split('/')
-	# left_date = datetime.date(int(left_date[2]), int(left_date[0]), int(left_date[1]))
-	# right_date = datetime.date(int(right_date[2]), int(right_date[0]), int(right_date[1]))
-
 	deals_in_range = []
 	lowest_fares_in_range = []
 	deal_list = deals[(depart_code,dest_code)]
@@ -77,13 +90,7 @@ def process(deals, low_fares, left_date, right_date, depart_code, dest_code):
 
 	return (deals_in_range, lowest_fares_in_range)
 
-#TODO: Consider points as well
-#Points is bool of if user wants to use points or not
-def cheapest_flight(deals_list):
-	#minimum = sys.maxsize()
-	return min(deals_list, key = lambda flight: flight[4]) 
-
 if(__name__ == "__main__"):
 	print("Hello World")
-	# print(is_in_date_range('12/1/1998 123', '12/12/2017 2123', '1/1/2000 123'))
-	# print(is_in_date_range('12/1/2010 123', '12/12/2017 2123', '1/1/2000 123'))
+	# print(is_in_date_range('12/01/1998', '12/12/2017', '01/01/2000'))
+	# print(is_in_date_range('12/01/2010', '12/12/2017', '01/01/2000'))
