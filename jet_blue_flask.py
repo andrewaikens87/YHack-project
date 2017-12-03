@@ -61,8 +61,19 @@ def runner():
 				low_fares[t] = set()
 				low_fares[t].add(tuple(row))
 
+	i = 0
+	input_array = []
+	while(i < 4):
+		input_string = str(input())
+		input_array.append(input_string)
+		i += 1
+		if(i == 4):
+			#print(jb.process(deals_dict, low_fares, input_array[0], input_array[1], input_array[2], input_array[3]))
+			i = 0
+			print((jb.get_away(deals_dict, low_fares, input_array[2]))[0], (jb.get_away(deals_dict, low_fares, input_array[2]))[1], (jb.get_away(deals_dict, low_fares, input_array[2]))[2])
+		if(input_string == "quit"):
+			break
 
-	print(jb.process(deals_dict, low_fares, '12/2/2017', '12/31/2017', 'SFO', 'BOS'))
 	app.run()
 
 
