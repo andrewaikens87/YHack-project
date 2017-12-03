@@ -55,7 +55,7 @@ def results(target_flights):
 	# 	string += '\t From: {} To: {} Date: {} Transfers: {} Score: {} Price: {} Tax: {}'.format(flight[1], flight[2],
 	# 		flight[3], flight[4], flight[5], flight[6], flight[7])
 
-if __name__ == '__main__':
+def runner():
 	s = ""
 	for line in open("airports.json"):
 		s += line
@@ -65,7 +65,7 @@ if __name__ == '__main__':
 	first = True
 
 	with open('Deals.csv', newline='') as deals:
-		reader_deals = csv.reader(deals, delimiter=',', quotechar="|")
+		reader_deals = csv.reader(deals, delimiter=',', quotechar="\"")
 		for row in list(reader_deals):
 			if(first):
 				first = False
@@ -91,6 +91,23 @@ if __name__ == '__main__':
 				low_fares[t] = set()
 				low_fares[t].add(tuple(row))
 
-
+	i = 0
+	input_array = []
+	while(i < 4):
+		input_string = str(input())
+		input_array.append(input_string)
+		i += 1
+		if(i == 4):
+			#print(jb.process(deals_dict, low_fares, input_array[0], input_array[1], input_array[2], input_array[3]))
+			i = 0
+			print((jb.get_away(deals_dict, low_fares, input_array[2]))[0], (jb.get_away(deals_dict, low_fares, input_array[2]))[1], (jb.get_away(deals_dict, low_fares, input_array[2]))[2])
+		if(input_string == "quit"):
+			break
+			
 	print(results(jb.process(deals_dict, low_fares, '12/2/2017', '1/31/2018', 'SFO', 'BOS')))
+
 	app.run()
+
+
+if __name__ == "__main__":
+	runner()
