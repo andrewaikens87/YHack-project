@@ -102,12 +102,3 @@ def runner():
 				low_fares[t] = set()
 				low_fares[t].add(tuple(row))
 
-<<<<<<< HEAD
-	#print(results(jb.process(deals_dict, low_fares, '12/2/2017', '1/31/2018', 'SFO', 'BOS')))
-=======
-
-	app.run()
-
->>>>>>> master
-
-	#app.run()
