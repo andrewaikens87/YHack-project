@@ -26,7 +26,7 @@ def domestic_vs_international(low_fares_dict):
 	print("Average Domestic Flight Cost: {0:.2f}".format(float(domestic_cost_sum)/domestic_total_flights))
 	print("Average International Flight Cost: {0:.2f}".format(float(international_cost_sum)/international_total_flights))
 
-	return ("Domestic Flights: {0:,6d}\nInternational Flights: {1:,6d}\nTotal Flights: {2:,6d}\n\nAvg. Domestic Cost: ${3:.2f}\nAvg. International Cost: {4:.2f}".format(
+	return ("Domestic Flights: {0:6d}\nInternational Flights: {1:6d}\nTotal Flights: {2:6d}\n\nAvg. Domestic Cost: ${3:.2f}\nAvg. International Cost: {4:.2f}".format(
 		domestic_total_flights, international_total_flights, total_flights, float(domestic_cost_sum)/domestic_total_flights, float(international_cost_sum)/international_total_flights))
 
 
