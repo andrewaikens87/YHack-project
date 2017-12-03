@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template
 from flask import jsonify
 from flask import request
 import json
@@ -8,6 +8,10 @@ import csv
 
 
 app = Flask(__name__)
+
+protocol = 'http://'
+host = 'localhost'
+port = '5000'
 
 airplane_data = dict()
 deals_dict = dict()
@@ -103,7 +107,7 @@ def runner():
 			print((jb.get_away(deals_dict, low_fares, input_array[2]))[0], (jb.get_away(deals_dict, low_fares, input_array[2]))[1], (jb.get_away(deals_dict, low_fares, input_array[2]))[2])
 		if(input_string == "quit"):
 			break
-			
+
 	print(results(jb.process(deals_dict, low_fares, '12/2/2017', '1/31/2018', 'SFO', 'BOS')))
 
 	app.run()
