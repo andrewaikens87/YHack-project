@@ -2,6 +2,32 @@ import json
 import datetime
 import csv
 
+def domestic_vs_international(low_fares_dict):
+	international_cost_sum = 0
+	international_total_flights = 0
+	domestic_cost_sum = 0
+	domestic_total_flights = 0
+
+	#Using only low fares to avoid duplicates seeing as it is the much larger data set
+	for k, v in low_fares_dict.items():
+		for item in v:
+			cost = float(item[5]) + float(item[6])
+			if int(item[9]) == 1:
+				domestic_cost_sum += cost
+				domestic_total_flights += 1
+			elif int(item[9]) == 0:
+				international_cost_sum += cost
+				international_total_flights += 1
+
+	total_flights = domestic_total_flights + international_total_flights
+	print("Domestic Flights: {0:6d}".format(domestic_total_flights))
+	print("International Flights: {0:6d}".format(international_total_flights))
+	print("Total Flights: {0:6d}\n".format(total_flights))
+	print("Average Domestic Flight Cost: {0:.2f}".format(float(domestic_cost_sum)/domestic_total_flights))
+	print("Average International Flight Cost: {0:.2f}".format(float(international_cost_sum)/international_total_flights))
+
+
+
 def get_away(deals_dict, low_fares_dict, start_airport):
 	lowest_price = 1000000
 	best_date = ""
